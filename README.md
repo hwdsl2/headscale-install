@@ -33,14 +33,16 @@ See also: [WireGuard](https://github.com/hwdsl2/wireguard-install), [OpenVPN](ht
 Download the script on your Linux server:
 
 ```bash
-wget -O headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
+wget -O headscale.sh https://get.vpnsetup.net/hs
 ```
 
-**Option 1:** Auto install using default options.
+**Option 1:** Auto install with a server URL.
 
 ```bash
-sudo bash headscale.sh --auto
+sudo bash headscale.sh --auto --serverurl https://hs.example.com
 ```
+
+Replace `https://hs.example.com` with your actual HTTPS server URL. If `--serverurl` is not provided, the server's public IP address is auto-detected and HTTP is used, which is not recommended for production. See [TLS and reverse proxy](#tls-and-reverse-proxy) for setup options.
 
 **Option 2:** Interactive install using custom options.
 
@@ -58,7 +60,13 @@ Click here if you are unable to download.
 You may also use `curl` to download:
 
 ```bash
-curl -fL -o headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
+curl -fL -o headscale.sh https://get.vpnsetup.net/hs
+```
+
+Alternative setup URL:
+
+```bash
+https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 ```
 
 If you are unable to download, open [headscale-install.sh](headscale-install.sh), then click the `Raw` button on the right. Press `Ctrl/Cmd+A` to select all, `Ctrl/Cmd+C` to copy, then paste into your favorite editor.
@@ -79,6 +87,8 @@ Options:
   --listusers                    list all users
   --listnodes                    list all registered nodes
   --listnodes  --user [name]     list nodes for a specific user
+  --registernode [node key]      register a node by its node key
+                --user [name]    (requires --user <name>)
   --deletenode [node ID]         delete a node by its numeric ID
   --createkey  --user [name]     create a reusable pre-auth key for a user
   --listkeys                     list pre-auth keys (all users)
@@ -117,6 +127,12 @@ tailscale up --login-server https://hs.example.com --authkey <key-from-output>
 ## Managing Headscale
 
 After setup, run the script again to manage your server.
+
+**Register a node by its node key:**
+
+```bash
+sudo bash headscale.sh --registernode <key> --user admin
+```
 
 **Add a user:**
 
@@ -167,6 +183,8 @@ sudo bash headscale.sh --uninstall
 ```
 
 You may also run the script without arguments for an interactive management menu.
+
+You can also run Headscale commands directly using `headscale <command>`. Refer to the [Headscale documentation](https://headscale.net/) for available commands.
 
 ## TLS and reverse proxy
 

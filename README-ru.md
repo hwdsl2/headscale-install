@@ -33,14 +33,16 @@
 Загрузите скрипт на ваш Linux-сервер:
 
 ```bash
-wget -O headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
+wget -O headscale.sh https://get.vpnsetup.net/hs
 ```
 
-**Вариант 1:** Автоматическая установка с параметрами по умолчанию.
+**Вариант 1:** Автоматическая установка с URL сервера.
 
 ```bash
-sudo bash headscale.sh --auto
+sudo bash headscale.sh --auto --serverurl https://hs.example.com
 ```
+
+Замените `https://hs.example.com` вашим реальным HTTPS URL сервера. Если `--serverurl` не указан, публичный IP-адрес сервера определяется автоматически и используется HTTP, что не рекомендуется для production. Варианты настройки см. в разделе [TLS и обратный прокси](#tls-и-обратный-прокси).
 
 **Вариант 2:** Интерактивная установка с пользовательскими параметрами.
 
@@ -58,7 +60,13 @@ sudo bash headscale.sh
 Также можно использовать `curl` для загрузки:
 
 ```bash
-curl -fL -o headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
+curl -fL -o headscale.sh https://get.vpnsetup.net/hs
+```
+
+Альтернативный URL для загрузки:
+
+```bash
+https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 ```
 
 Если загрузить не удаётся, откройте [headscale-install.sh](headscale-install.sh), затем нажмите кнопку `Raw` справа. Нажмите `Ctrl/Cmd+A` для выделения всего, `Ctrl/Cmd+C` для копирования, затем вставьте в любой текстовый редактор.
@@ -79,6 +87,8 @@ curl -fL -o headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/he
   --listusers                    список всех пользователей
   --listnodes                    список всех зарегистрированных узлов
   --listnodes  --user [имя]      список узлов конкретного пользователя
+  --registernode [ключ узла]     зарегистрировать узел по его ключу
+                --user [имя]     (требует --user <имя>)
   --deletenode [ID узла]         удалить узел по числовому ID
   --createkey  --user [имя]      создать многоразовый ключ предавторизации для пользователя
   --listkeys                     список ключей предавторизации (все пользователи)
@@ -117,6 +127,12 @@ tailscale up --login-server https://hs.example.com --authkey <ключ-из-вы
 ## Управление Headscale
 
 После установки запустите скрипт снова для управления сервером.
+
+**Зарегистрировать узел по его ключу:**
+
+```bash
+sudo bash headscale.sh --registernode <key> --user admin
+```
 
 **Добавить пользователя:**
 
@@ -167,6 +183,8 @@ sudo bash headscale.sh --uninstall
 ```
 
 Также можно запустить скрипт без аргументов для интерактивного меню управления.
+
+Также можно выполнять команды Headscale напрямую с помощью `headscale <команда>`. Доступные команды см. в [документации Headscale](https://headscale.net/).
 
 ## TLS и обратный прокси
 

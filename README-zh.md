@@ -33,14 +33,16 @@
 在你的 Linux 服务器上下载脚本：
 
 ```bash
-wget -O headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
+wget -O headscale.sh https://get.vpnsetup.net/hs
 ```
 
-**选项 1：** 使用默认选项自动安装。
+**选项 1：** 使用服务器 URL 自动安装。
 
 ```bash
-sudo bash headscale.sh --auto
+sudo bash headscale.sh --auto --serverurl https://hs.example.com
 ```
+
+请将 `https://hs.example.com` 替换为你的实际 HTTPS 服务器 URL。若未提供 `--serverurl`，将自动检测服务器的公网 IP 地址并使用 HTTP，不推荐用于生产环境。请参阅 [TLS 与反向代理](#tls-与反向代理) 了解配置选项。
 
 **选项 2：** 使用自定义选项进行交互式安装。
 
@@ -58,7 +60,13 @@ sudo bash headscale.sh
 也可使用 `curl` 下载：
 
 ```bash
-curl -fL -o headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
+curl -fL -o headscale.sh https://get.vpnsetup.net/hs
+```
+
+备用下载地址：
+
+```bash
+https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 ```
 
 如果仍无法下载，请打开 [headscale-install.sh](headscale-install.sh)，然后点击右侧的 `Raw` 按钮。按 `Ctrl/Cmd+A` 全选，`Ctrl/Cmd+C` 复制，然后粘贴到你喜欢的编辑器中。
@@ -79,6 +87,8 @@ curl -fL -o headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/he
   --listusers                      列出所有用户
   --listnodes                      列出所有已注册节点
   --listnodes  --user [名称]       列出特定用户的节点
+  --registernode [节点密钥]        按节点密钥注册节点
+                --user [名称]      （需要 --user <名称>）
   --deletenode [节点 ID]           按数字 ID 删除节点
   --createkey  --user [名称]       为用户创建可重用预授权密钥
   --listkeys                       列出预授权密钥（所有用户）
@@ -117,6 +127,12 @@ tailscale up --login-server https://hs.example.com --authkey <输出中的密钥
 ## 管理 Headscale
 
 安装完成后，再次运行脚本即可管理你的服务器。
+
+**按节点密钥注册节点：**
+
+```bash
+sudo bash headscale.sh --registernode <key> --user admin
+```
 
 **添加用户：**
 
@@ -167,6 +183,8 @@ sudo bash headscale.sh --uninstall
 ```
 
 也可不带参数运行脚本以进入交互式管理菜单。
+
+也可直接使用 `headscale <命令>` 运行 Headscale 命令。可用命令请参阅 [Headscale 文档](https://headscale.net/)。
 
 ## TLS 与反向代理
 
