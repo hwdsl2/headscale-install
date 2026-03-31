@@ -140,6 +140,12 @@ sudo bash headscale.sh --registernode <key> --user admin
 sudo bash headscale.sh --adduser alice
 ```
 
+**删除用户：**
+
+```bash
+sudo bash headscale.sh --deleteuser alice
+```
+
 **为用户创建预授权密钥：**
 
 ```bash
@@ -176,21 +182,41 @@ sudo bash headscale.sh --deletenode 3
 sudo bash headscale.sh --listkeys
 ```
 
+**列出特定用户的预授权密钥：**
+
+```bash
+sudo bash headscale.sh --listkeys --user alice
+```
+
 **卸载 Headscale：**
 
 ```bash
 sudo bash headscale.sh --uninstall
 ```
 
+**显示帮助信息：**
+
+```bash
+sudo bash headscale.sh --help
+```
+
 也可不带参数运行脚本以进入交互式管理菜单。
 
-也可直接使用 `headscale <命令>` 运行 Headscale 命令。可用命令请参阅 [Headscale 文档](https://headscale.net/)。
+也可直接使用 `headscale <命令>` 运行 Headscale 命令。运行 `headscale -h` 或参阅 [Headscale 文档](https://headscale.net/) 查看可用命令。
+
+## 客户端配置
+
+有关连接客户端的说明，请参阅 Headscale 文档：
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple（iOS / macOS）](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## TLS 与反向代理
 
 Tailscale 客户端需要 HTTPS 才能实现完整功能。推荐的配置是在 Headscale 前使用反向代理处理 TLS，然后在安装时传入 `--serverurl https://hs.example.com`（或在 `/etc/headscale/config.yaml` 中设置 `server_url` 并重启服务）。
 
-**使用 Caddy 的示例**（通过 Let's Encrypt 自动申请 TLS）：
+**使用 [Caddy](https://caddyserver.com/docs/) 的示例**（通过 Let's Encrypt 自动申请 TLS）：
 
 ```
 hs.example.com {

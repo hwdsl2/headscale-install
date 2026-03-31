@@ -140,6 +140,12 @@ sudo bash headscale.sh --registernode <key> --user admin
 sudo bash headscale.sh --adduser alice
 ```
 
+**Delete a user:**
+
+```bash
+sudo bash headscale.sh --deleteuser alice
+```
+
 **Create a pre-auth key for a user:**
 
 ```bash
@@ -176,21 +182,41 @@ sudo bash headscale.sh --deletenode 3
 sudo bash headscale.sh --listkeys
 ```
 
+**List pre-auth keys for a specific user:**
+
+```bash
+sudo bash headscale.sh --listkeys --user alice
+```
+
 **Remove Headscale:**
 
 ```bash
 sudo bash headscale.sh --uninstall
 ```
 
+**Show help:**
+
+```bash
+sudo bash headscale.sh --help
+```
+
 You may also run the script without arguments for an interactive management menu.
 
-You can also run Headscale commands directly using `headscale <command>`. Refer to the [Headscale documentation](https://headscale.net/) for available commands.
+You can also run Headscale commands directly using `headscale <command>`. Run `headscale -h` or refer to the [Headscale documentation](https://headscale.net/) for available commands.
+
+## Client configuration
+
+Refer to the Headscale documentation for instructions on connecting clients:
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## TLS and reverse proxy
 
 Tailscale clients require HTTPS for full functionality. The recommended setup is a reverse proxy in front of Headscale that handles TLS, then pass `--serverurl https://hs.example.com` during install (or set `server_url` in `/etc/headscale/config.yaml` and restart the service).
 
-**Example with Caddy** (automatic TLS via Let's Encrypt):
+**Example with [Caddy](https://caddyserver.com/docs/)** (automatic TLS via Let's Encrypt):
 
 ```
 hs.example.com {
