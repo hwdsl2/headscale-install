@@ -184,6 +184,12 @@ parse_args() {
       list_nodes=1
       shift
       ;;
+    --registernode)
+      register_node=1
+      target_node_key="$2"
+      shift
+      shift
+      ;;
     --deletenode)
       delete_node=1
       target_node_id="$2"
@@ -243,8 +249,8 @@ parse_args() {
 
 check_args() {
   local mgmt_count
-  mgmt_count=$((add_user + delete_user + list_users + list_nodes + delete_node + \
-    create_key + list_keys))
+  mgmt_count=$((add_user + delete_user + list_users + list_nodes + register_node + \
+    delete_node + create_key + list_keys))
 
   if [ "$auto" != 0 ] && [ -e "$HS_CONF" ]; then
     show_usage "Invalid parameter '--auto'. Headscale is already set up on this server."
@@ -261,6 +267,7 @@ check_args() {
     [ "$list_users" = 1 ] && exiterr "$st_text listing users."
     [ "$list_nodes" = 1 ] && exiterr "$st_text listing nodes."
     [ "$delete_node" = 1 ] && exiterr "$st_text deleting a node."
+    [ "$register_node" = 1 ] && exiterr "$st_text registering a node."
     [ "$create_key" = 1 ] && exiterr "$st_text creating a pre-auth key."
     [ "$list_keys" = 1 ] && exiterr "$st_text listing pre-auth keys."
     [ "$remove_hs" = 1 ] && exiterr "Cannot remove Headscale because it has not been set up on this server."
@@ -289,6 +296,14 @@ check_args() {
     fi
     if ! printf '%s' "$target_node_id" | grep -Eq '^[0-9]+$'; then
       exiterr "Node ID must be a positive integer."
+    fi
+  fi
+  if [ "$register_node" = 1 ]; then
+    if [ -z "$target_node_key" ]; then
+      exiterr "--registernode requires a node key. Copy the key shown by 'tailscale up'."
+    fi
+    if [ -z "$target_user" ]; then
+      exiterr "--registernode requires --user <name>. Use '--listusers' to find user names."
     fi
   fi
   if [ -n "$server_url" ] || [ -n "$server_port" ] ||
@@ -394,6 +409,8 @@ Options:
   --listusers                    list all users
   --listnodes                    list all registered nodes
   --listnodes  --user [name]     list nodes for a specific user
+  --registernode [node key]      register a node by its node key
+                --user [name]    (requires --user <name>)
   --deletenode [node ID]         delete a node by its numeric ID
   --createkey  --user [name]     create a reusable pre-auth key for a user
   --listkeys                     list pre-auth keys (all users)
@@ -968,13 +985,14 @@ select_menu_option() {
   echo "   2) Delete a user"
   echo "   3) List users"
   echo "   4) List all nodes"
-  echo "   5) Delete a node"
-  echo "   6) Create a pre-auth key"
-  echo "   7) List pre-auth keys"
-  echo "   8) Remove Headscale"
-  echo "   9) Exit"
+  echo "   5) Register a node"
+  echo "   6) Delete a node"
+  echo "   7) Create a pre-auth key"
+  echo "   8) List pre-auth keys"
+  echo "   9) Remove Headscale"
+  echo "  10) Exit"
   read -rp "Option: " option
-  until [[ "$option" =~ ^[1-9]$ ]]; do
+  until [[ "$option" =~ ^([1-9]|10)$ ]]; do
     echo "$option: invalid selection."
     read -rp "Option: " option
   done
@@ -1036,7 +1054,7 @@ do_delete_user() {
   fi
   echo
   echo "Deleting user '$username'..."
-  if hs_cmd users delete "$username" 2>&1; then
+  if hs_cmd users delete --name "$username" 2>&1; then
     echo
     echo "User '$username' deleted."
   else
@@ -1096,6 +1114,21 @@ confirm_delete_node() {
       ;;
     esac
   fi
+}
+
+do_register_node() {
+  echo
+  echo "Registering node for user '$target_user'..."
+  if hs_cmd nodes register --user "$target_user" --key "$target_node_key" 2>&1; then
+    echo
+    echo "Node registered successfully."
+  else
+    echo
+    echo "Failed to register node." >&2
+    echo "Make sure the node key and user name are correct." >&2
+    exit 1
+  fi
+  echo
 }
 
 do_delete_node() {
@@ -1242,6 +1275,7 @@ hssetup() {
   list_users=0
   list_nodes=0
   delete_node=0
+  register_node=0
   create_key=0
   list_keys=0
   remove_hs=0
@@ -1251,6 +1285,7 @@ hssetup() {
   base_domain_arg=""
   target_user=""
   target_node_id=""
+  target_node_key=""
   unsanitized_username=""
   username=""
   computed_server_url=""
@@ -1299,6 +1334,13 @@ hssetup() {
     check_service_running
     confirm_delete_node
     do_delete_node
+    exit 0
+  fi
+
+  if [ "$register_node" = 1 ]; then
+    show_header
+    check_service_running
+    do_register_node
     exit 0
   fi
 
@@ -1430,6 +1472,17 @@ hssetup() {
       ;;
     5)
       check_service_running
+      echo
+      read -rp "Username to register the node for: " target_user
+      [ -z "$target_user" ] && abort_and_exit
+      echo
+      read -rp "Node key (from 'tailscale up' output): " target_node_key
+      [ -z "$target_node_key" ] && abort_and_exit
+      do_register_node
+      exit 0
+      ;;
+    6)
+      check_service_running
       target_user=""
       target_node_id=""
       enter_node_id_interactive
@@ -1437,7 +1490,7 @@ hssetup() {
       do_delete_node
       exit 0
       ;;
-    6)
+    7)
       check_service_running
       echo
       read -rp "Username for the pre-auth key: " target_user
@@ -1445,13 +1498,13 @@ hssetup() {
       do_create_key
       exit 0
       ;;
-    7)
+    8)
       check_service_running
       target_user=""
       do_list_keys
       exit 0
       ;;
-    8)
+    9)
       confirm_remove_hs
       if [[ "$remove" =~ ^[yY]$ ]]; then
         print_remove_hs
@@ -1468,7 +1521,7 @@ hssetup() {
         exit 1
       fi
       ;;
-    9)
+    10)
       exit 0
       ;;
     esac
