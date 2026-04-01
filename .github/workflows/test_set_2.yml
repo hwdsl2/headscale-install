@@ -1,0 +1,55 @@
+name: test_set_2
+
+on: workflow_call
+
+jobs:
+  test_set_2:
+    if: github.repository_owner == 'hwdsl2'
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, ubuntu-22.04]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Test
+        run: |
+          set -ex
+
+          cd "$GITHUB_WORKSPACE"
+          ls -ld headscale-install.sh
+
+          cp -f headscale-install.sh ./hs-install.sh
+
+          sudo bash hs-install.sh --auto --serverurl http://127.0.0.1:8080
+
+          sudo systemctl status headscale.service
+          sudo test -S /var/run/headscale/headscale.sock
+          sudo test -f /etc/headscale/config.yaml
+          sudo test -x /usr/local/bin/headscale
+          sudo grep -q 'server_url: http://127.0.0.1:8080' /etc/headscale/config.yaml
+          sudo grep -q 'listen_addr: 0.0.0.0:8080' /etc/headscale/config.yaml
+
+          sudo bash hs-install.sh --listusers
+          sudo bash hs-install.sh --listusers | grep -q 'admin'
+
+          sudo bash hs-install.sh --adduser vpnuser
+          sudo bash hs-install.sh --listusers | grep -q 'vpnuser'
+
+          sudo bash hs-install.sh --listnodes
+
+          sudo bash hs-install.sh --createkey --user admin
+          sudo bash hs-install.sh --listkeys
+
+          sudo bash hs-install.sh --deleteuser vpnuser --yes
+          sudo bash hs-install.sh --listusers | grep -q 'vpnuser' && exit 1
+
+          sudo bash hs-install.sh --uninstall --yes
+
+          sudo test -x /usr/local/bin/headscale && exit 1
+          sudo test -f /etc/systemd/system/headscale.service && exit 1
+          sudo test -f /etc/headscale/config.yaml && exit 1
+
+          exit 0

@@ -6,29 +6,19 @@ on:
     paths:
       - '**.sh'
       - '.github/workflows/main.yml'
+      - '.github/workflows/shellcheck.yml'
+      - '.github/workflows/test_set_1.yml'
+      - '.github/workflows/test_set_2.yml'
 
 jobs:
   shellcheck:
-    runs-on: ubuntu-24.04
     if: github.repository_owner == 'hwdsl2'
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - name: Check
-        run: |
-          if [ ! -x /usr/bin/shellcheck ]; then
-            export DEBIAN_FRONTEND=noninteractive
-            sudo apt-get -yqq update
-            sudo apt-get -yqq install shellcheck
-          fi
+    uses: ./.github/workflows/shellcheck.yml
 
-          cd "$GITHUB_WORKSPACE"
-          pwd
-          ls -ld headscale-install.sh
+  test_set_1:
+    needs: shellcheck
+    uses: ./.github/workflows/test_set_1.yml
 
-          export SHELLCHECK_OPTS="-e SC1090,SC1091"
-          shellcheck --version
-          shopt -s globstar
-          ls -ld -- **/*.sh
-          shellcheck **/*.sh
+  test_set_2:
+    needs: shellcheck
+    uses: ./.github/workflows/test_set_2.yml
