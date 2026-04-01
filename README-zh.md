@@ -91,8 +91,7 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
                 --user [名称]      （需要 --user <名称>）
   --deletenode [节点 ID]           按数字 ID 删除节点
   --createkey  --user [名称]       为用户创建可重用预授权密钥
-  --listkeys                       列出预授权密钥（所有用户）
-  --listkeys   --user [名称]       列出特定用户的预授权密钥
+  --listkeys                       列出预授权密钥
   --uninstall                      删除 Headscale 及所有配置
   -y, --yes                        对提示自动回答"是"
   -h, --help                       显示此帮助信息并退出
@@ -123,6 +122,14 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 ```bash
 tailscale up --login-server https://hs.example.com --authkey <输出中的密钥>
 ```
+
+## 客户端配置
+
+有关连接客户端的说明，请参阅 Headscale 文档：
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple（iOS / macOS）](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## 管理 Headscale
 
@@ -182,12 +189,6 @@ sudo bash headscale.sh --deletenode 3
 sudo bash headscale.sh --listkeys
 ```
 
-**列出特定用户的预授权密钥：**
-
-```bash
-sudo bash headscale.sh --listkeys --user alice
-```
-
 **卸载 Headscale：**
 
 ```bash
@@ -203,14 +204,6 @@ sudo bash headscale.sh --help
 也可不带参数运行脚本以进入交互式管理菜单。
 
 也可直接使用 `headscale <命令>` 运行 Headscale 命令。运行 `headscale -h` 或参阅 [Headscale 文档](https://headscale.net/) 查看可用命令。
-
-## 客户端配置
-
-有关连接客户端的说明，请参阅 Headscale 文档：
-
-- [Android](https://headscale.net/stable/usage/connect/android/)
-- [Apple（iOS / macOS）](https://headscale.net/stable/usage/connect/apple/)
-- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## TLS 与反向代理
 

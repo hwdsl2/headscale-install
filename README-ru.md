@@ -91,8 +91,7 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
                 --user [имя]     (требует --user <имя>)
   --deletenode [ID узла]         удалить узел по числовому ID
   --createkey  --user [имя]      создать многоразовый ключ предавторизации для пользователя
-  --listkeys                     список ключей предавторизации (все пользователи)
-  --listkeys   --user [имя]      список ключей предавторизации конкретного пользователя
+  --listkeys                     список ключей предавторизации
   --uninstall                    удалить Headscale и всю конфигурацию
   -y, --yes                      отвечать «да» на все запросы
   -h, --help                     показать это сообщение и выйти
@@ -123,6 +122,14 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 ```bash
 tailscale up --login-server https://hs.example.com --authkey <ключ-из-вывода>
 ```
+
+## Настройка клиентов
+
+Инструкции по подключению клиентов см. в документации Headscale:
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## Управление Headscale
 
@@ -182,12 +189,6 @@ sudo bash headscale.sh --deletenode 3
 sudo bash headscale.sh --listkeys
 ```
 
-**Список ключей предварительной авторизации конкретного пользователя:**
-
-```bash
-sudo bash headscale.sh --listkeys --user alice
-```
-
 **Удалить Headscale:**
 
 ```bash
@@ -203,14 +204,6 @@ sudo bash headscale.sh --help
 Также можно запустить скрипт без аргументов для интерактивного меню управления.
 
 Также можно выполнять команды Headscale напрямую с помощью `headscale <команда>`. Выполните `headscale -h` или см. [документацию Headscale](https://headscale.net/) для просмотра доступных команд.
-
-## Настройка клиентов
-
-Инструкции по подключению клиентов см. в документации Headscale:
-
-- [Android](https://headscale.net/stable/usage/connect/android/)
-- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
-- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## TLS и обратный прокси
 

@@ -91,8 +91,7 @@ Options:
                 --user [name]    (requires --user <name>)
   --deletenode [node ID]         delete a node by its numeric ID
   --createkey  --user [name]     create a reusable pre-auth key for a user
-  --listkeys                     list pre-auth keys (all users)
-  --listkeys   --user [name]     list pre-auth keys for a specific user
+  --listkeys                     list pre-auth keys
   --uninstall                    remove Headscale and delete all configuration
   -y, --yes                      assume "yes" as answer to prompts
   -h, --help                     show this help message and exit
@@ -123,6 +122,14 @@ Copy the pre-auth key from the output and connect a device with the official [Ta
 ```bash
 tailscale up --login-server https://hs.example.com --authkey <key-from-output>
 ```
+
+## Client configuration
+
+Refer to the Headscale documentation for instructions on connecting clients:
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## Managing Headscale
 
@@ -182,12 +189,6 @@ sudo bash headscale.sh --deletenode 3
 sudo bash headscale.sh --listkeys
 ```
 
-**List pre-auth keys for a specific user:**
-
-```bash
-sudo bash headscale.sh --listkeys --user alice
-```
-
 **Remove Headscale:**
 
 ```bash
@@ -203,14 +204,6 @@ sudo bash headscale.sh --help
 You may also run the script without arguments for an interactive management menu.
 
 You can also run Headscale commands directly using `headscale <command>`. Run `headscale -h` or refer to the [Headscale documentation](https://headscale.net/) for available commands.
-
-## Client configuration
-
-Refer to the Headscale documentation for instructions on connecting clients:
-
-- [Android](https://headscale.net/stable/usage/connect/android/)
-- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
-- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## TLS and reverse proxy
 
