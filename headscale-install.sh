@@ -413,8 +413,7 @@ Options:
                 --user [name]    (requires --user <name>)
   --deletenode [node ID]         delete a node by its numeric ID
   --createkey  --user [name]     create a reusable pre-auth key for a user
-  --listkeys                     list pre-auth keys (all users)
-  --listkeys   --user [name]     list pre-auth keys for a specific user
+  --listkeys                     list pre-auth keys
   --uninstall                    remove Headscale and delete all configuration
   -y, --yes                      assume "yes" as answer to prompts
   -h, --help                     show this help message and exit
@@ -1054,7 +1053,7 @@ do_delete_user() {
   fi
   echo
   echo "Deleting user '$username'..."
-  if hs_cmd users delete --name "$username" 2>&1; then
+  if hs_cmd users delete --name "$username" --force 2>&1; then
     echo
     echo "User '$username' deleted."
   else
@@ -1177,15 +1176,9 @@ do_create_key() {
 
 do_list_keys() {
   echo
-  if [ -n "$target_user" ]; then
-    echo "Pre-auth keys for user '$target_user':"
-    echo
-    hs_cmd preauthkeys list --user "$target_user" 2>&1
-  else
-    echo "All pre-auth keys:"
-    echo
-    hs_cmd preauthkeys list 2>&1
-  fi
+  echo "All pre-auth keys:"
+  echo
+  hs_cmd preauthkeys list 2>&1
   echo
 }
 
