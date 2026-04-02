@@ -4,7 +4,7 @@
 
 [![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml)
 
-**Также доступно:** [Сервер Headscale на Docker](https://github.com/hwdsl2/docker-headscale/blob/main/README-ru.md).
+**Новинка:** Также доступно: [сервер Headscale на Docker](https://github.com/hwdsl2/docker-headscale/blob/main/README-ru.md).
 
 Установщик сервера Headscale для Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS, RHEL, Fedora и openSUSE.
 
@@ -277,7 +277,7 @@ sudo bash headscale.sh --auto \
 
 ## Лицензия
 
-Copyright (C) 2026 Lin Song
+Copyright (C) 2026 Lin Song   
 Эта работа распространяется под [лицензией MIT](https://opensource.org/licenses/MIT).
 
 **Headscale** является Copyright (c) 2020, Juan Font, и распространяется под [лицензией BSD 3-Clause](https://github.com/juanfont/headscale/blob/main/LICENSE).

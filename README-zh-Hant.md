@@ -4,7 +4,7 @@
 
 [![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml)
 
-**另提供：** [在 Docker 上運行 Headscale 伺服器](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh-Hant.md)。
+**新：** Docker 版本也可用：[Docker 上的 Headscale 伺服器](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh-Hant.md)。
 
 適用於 Ubuntu、Debian、AlmaLinux、Rocky Linux、CentOS、RHEL、Fedora 和 openSUSE 的 Headscale 伺服器安裝腳本。
 
@@ -277,8 +277,8 @@ sudo bash headscale.sh --auto \
 
 ## 授權條款
 
-Copyright (C) 2026 Lin Song
-本作品依據[MIT 授權條款](https://opensource.org/licenses/MIT)授權。
+Copyright (C) 2026 Lin Song   
+本作品依據 [MIT 授權條款](https://opensource.org/licenses/MIT)授權。
 
 **Headscale** 的版權歸 Juan Font 所有（2020 年），遵循 [BSD 3-Clause 授權條款](https://github.com/juanfont/headscale/blob/main/LICENSE)。
 

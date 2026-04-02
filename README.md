@@ -4,7 +4,7 @@
 
 [![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml)
 
-**Also available:** [Headscale server on Docker](https://github.com/hwdsl2/docker-headscale).
+**New:** Also available: [Headscale server on Docker](https://github.com/hwdsl2/docker-headscale).
 
 Headscale server installer for Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS, RHEL, Fedora and openSUSE.
 
@@ -277,7 +277,7 @@ All install options are optional when using `--auto`. If `--serverurl` is not pr
 
 ## License
 
-Copyright (C) 2026 Lin Song
+Copyright (C) 2026 Lin Song   
 This work is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 **Headscale** is Copyright (c) 2020, Juan Font, and is distributed under the [BSD 3-Clause License](https://github.com/juanfont/headscale/blob/main/LICENSE).
