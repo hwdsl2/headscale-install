@@ -2,7 +2,7 @@
 
 # Headscale Server Auto Setup Script
 
-[![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml)
+[![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
 
 **New:** Also available: [Headscale server on Docker](https://github.com/hwdsl2/docker-headscale).
 
@@ -101,6 +101,7 @@ Install options (optional):
   --auto                         auto install Headscale using default or custom options
   --serverurl  [URL]             server URL (e.g. https://hs.example.com)
   --port       [number]          TCP port for Headscale (1-65535, default: 8080)
+  --listenaddr [address]         listen address (default: 0.0.0.0, use 127.0.0.1 for local only)
   --username   [name]            name for the initial user (default: admin)
   --basedomain [domain]          MagicDNS base domain (default: headscale.internal)
 
@@ -209,6 +210,8 @@ You can also run Headscale commands directly using `headscale <command>`. Run `h
 
 Tailscale clients require HTTPS for full functionality. The recommended setup is a reverse proxy in front of Headscale that handles TLS, then pass `--serverurl https://hs.example.com` during install (or set `server_url` in `/etc/headscale/config.yaml` and restart the service).
 
+When using a reverse proxy, add `--listenaddr 127.0.0.1` to restrict Headscale to listen on localhost only (recommended).
+
 **Example with [Caddy](https://caddyserver.com/docs/)** (automatic TLS via Let's Encrypt):
 
 ```
@@ -269,6 +272,7 @@ sudo journalctl -u headscale -n 50
 sudo bash headscale.sh --auto \
   --serverurl https://hs.example.com \
   --port 8080 \
+  --listenaddr 127.0.0.1 \
   --username admin \
   --basedomain headscale.internal
 ```

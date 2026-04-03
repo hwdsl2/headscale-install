@@ -2,7 +2,7 @@
 
 # Скрипт автоматической установки сервера Headscale
 
-[![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml)
+[![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
 
 **Новинка:** Также доступно: [сервер Headscale на Docker](https://github.com/hwdsl2/docker-headscale/blob/main/README-ru.md).
 
@@ -101,6 +101,7 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
   --auto                         автоматически установить Headscale с параметрами по умолчанию или пользовательскими
   --serverurl  [URL]             URL сервера (например, https://hs.example.com)
   --port       [число]           TCP-порт для Headscale (1-65535, по умолчанию: 8080)
+  --listenaddr [адрес]           адрес прослушивания (по умолчанию: 0.0.0.0, только локально: 127.0.0.1)
   --username   [имя]             имя начального пользователя (по умолчанию: admin)
   --basedomain [домен]           базовый домен MagicDNS (по умолчанию: headscale.internal)
 
@@ -209,6 +210,8 @@ sudo bash headscale.sh --help
 
 Для полной функциональности клиентам Tailscale необходим HTTPS. Рекомендуемая схема — настроить обратный прокси перед Headscale для обработки TLS, затем передать `--serverurl https://hs.example.com` при установке (или задать `server_url` в `/etc/headscale/config.yaml` и перезапустить службу).
 
+При использовании обратного прокси рекомендуется добавить `--listenaddr 127.0.0.1`, чтобы Headscale принимал подключения только на локальном интерфейсе.
+
 **Пример с [Caddy](https://caddyserver.com/docs/)** (автоматический TLS через Let's Encrypt):
 
 ```
@@ -269,6 +272,7 @@ sudo journalctl -u headscale -n 50
 sudo bash headscale.sh --auto \
   --serverurl https://hs.example.com \
   --port 8080 \
+  --listenaddr 127.0.0.1 \
   --username admin \
   --basedomain headscale.internal
 ```

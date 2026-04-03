@@ -2,7 +2,7 @@
 
 # Headscale 伺服器自動安裝腳本
 
-[![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml)
+[![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
 
 **新：** Docker 版本也可用：[Docker 上的 Headscale 伺服器](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh-Hant.md)。
 
@@ -101,6 +101,7 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
   --auto                           使用預設或自訂選項自動安裝 Headscale
   --serverurl  [URL]               伺服器 URL（例如 https://hs.example.com）
   --port       [數字]              Headscale 的 TCP 連接埠（1-65535，預設：8080）
+  --listenaddr [位址]              監聽位址（預設：0.0.0.0，僅本機使用：127.0.0.1）
   --username   [名稱]              初始使用者名稱（預設：admin）
   --basedomain [網域]              MagicDNS 基礎網域（預設：headscale.internal）
 
@@ -209,6 +210,8 @@ sudo bash headscale.sh --help
 
 Tailscale 客戶端需要 HTTPS 才能實現完整功能。建議的設定是在 Headscale 前使用反向代理處理 TLS，然後在安裝時傳入 `--serverurl https://hs.example.com`（或在 `/etc/headscale/config.yaml` 中設定 `server_url` 並重新啟動服務）。
 
+使用反向代理時，建議加入 `--listenaddr 127.0.0.1` 以將 Headscale 限制為僅在本機監聽。
+
 **使用 [Caddy](https://caddyserver.com/docs/) 的範例**（透過 Let's Encrypt 自動申請 TLS）：
 
 ```
@@ -269,6 +272,7 @@ sudo journalctl -u headscale -n 50
 sudo bash headscale.sh --auto \
   --serverurl https://hs.example.com \
   --port 8080 \
+  --listenaddr 127.0.0.1 \
   --username admin \
   --basedomain headscale.internal
 ```
