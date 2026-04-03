@@ -52,4 +52,14 @@ jobs:
           sudo test -f /etc/systemd/system/headscale.service && exit 1
           sudo test -f /etc/headscale/config.yaml && exit 1
 
+          # Test --listenaddr option
+          sudo bash hs-install.sh --auto --serverurl http://127.0.0.1:8080 --listenaddr 127.0.0.1
+
+          sudo test -f /etc/headscale/config.yaml
+          sudo grep -q 'listen_addr: 127.0.0.1:8080' /etc/headscale/config.yaml
+
+          sudo bash hs-install.sh --uninstall --yes
+
+          sudo test -f /etc/headscale/config.yaml && exit 1
+
           exit 0
