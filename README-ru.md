@@ -26,7 +26,8 @@
 - Linux-сервер (облачный сервер, VPS или выделенный сервер)
 - Для production-использования настоятельно рекомендуется **публично доступное доменное имя с HTTPS**
 
-> **Примечание:** Без HTTPS некоторые клиенты Tailscale могут не подключиться. Варианты настройки см. в разделе [TLS и обратный прокси](#tls-и-обратный-прокси).
+> [!NOTE]
+> Без HTTPS некоторые клиенты Tailscale могут не подключиться. Варианты настройки см. в разделе [TLS и обратный прокси](#tls-и-обратный-прокси).
 
 ## Установка
 
@@ -34,6 +35,12 @@
 
 ```bash
 wget -O headscale.sh https://get.vpnsetup.net/hs
+```
+
+По этому URL скрипт загружается с зеркала, которое я размещаю. Если вы предпочитаете загрузить напрямую с GitHub:
+
+```bash
+wget -O headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 ```
 
 **Вариант 1:** Автоматическая установка с URL сервера.
@@ -60,13 +67,7 @@ sudo bash headscale.sh
 Также можно использовать `curl` для загрузки:
 
 ```bash
-curl -fL -o headscale.sh https://get.vpnsetup.net/hs
-```
-
-Альтернативный URL для загрузки:
-
-```bash
-https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
+curl -fL -o headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 ```
 
 Если загрузить не удаётся, откройте [headscale-install.sh](headscale-install.sh), затем нажмите кнопку `Raw` справа. Нажмите `Ctrl/Cmd+A` для выделения всего, `Ctrl/Cmd+C` для копирования, затем вставьте в любой текстовый редактор.

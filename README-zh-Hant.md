@@ -26,7 +26,8 @@
 - 一台 Linux 伺服器（雲端伺服器、VPS 或獨立伺服器）
 - 強烈建議在正式環境中使用**可公開存取的具有 HTTPS 的網域名稱**
 
-> **注：** 若不使用 HTTPS，部分 Tailscale 客戶端可能無法正常連線。請參閱 [TLS 與反向代理](#tls-與反向代理) 了解設定選項。
+> [!NOTE]
+> 若不使用 HTTPS，部分 Tailscale 客戶端可能無法正常連線。請參閱 [TLS 與反向代理](#tls-與反向代理) 了解設定選項。
 
 ## 安裝
 
@@ -34,6 +35,12 @@
 
 ```bash
 wget -O headscale.sh https://get.vpnsetup.net/hs
+```
+
+此 URL 從我託管的鏡像下載腳本。如果你希望直接從 GitHub 下載：
+
+```bash
+wget -O headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 ```
 
 **選項 1：** 使用伺服器 URL 自動安裝。
@@ -60,13 +67,7 @@ sudo bash headscale.sh
 也可使用 `curl` 下載：
 
 ```bash
-curl -fL -o headscale.sh https://get.vpnsetup.net/hs
-```
-
-備用下載地址：
-
-```bash
-https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
+curl -fL -o headscale.sh https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 ```
 
 如果仍無法下載，請開啟 [headscale-install.sh](headscale-install.sh)，然後點擊右側的 `Raw` 按鈕。按 `Ctrl/Cmd+A` 全選，`Ctrl/Cmd+C` 複製，然後貼上至你喜歡的編輯器中。
