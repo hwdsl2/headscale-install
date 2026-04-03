@@ -223,6 +223,11 @@ parse_args() {
       shift
       shift
       ;;
+    --listenaddr)
+      listen_addr_arg="$2"
+      shift
+      shift
+      ;;
     --username)
       first_username="$2"
       shift
@@ -307,12 +312,15 @@ check_args() {
     fi
   fi
   if [ -n "$server_url" ] || [ -n "$server_port" ] ||
-    [ -n "$first_username" ] || [ -n "$base_domain_arg" ]; then
+    [ -n "$first_username" ] || [ -n "$base_domain_arg" ] || [ -n "$listen_addr_arg" ]; then
     if [ -e "$HS_CONF" ]; then
       show_usage "Invalid parameters. Headscale is already set up on this server."
     elif [ "$auto" = 0 ]; then
       show_usage "Invalid parameters. You must specify '--auto' when using these parameters."
     fi
+  fi
+  if [ -n "$listen_addr_arg" ] && ! check_ip "$listen_addr_arg"; then
+    exiterr "Invalid listen address '$listen_addr_arg'. Must be a valid IPv4 address (e.g. 127.0.0.1 or 0.0.0.0)."
   fi
   if [ -n "$server_url" ] && ! check_url "$server_url"; then
     exiterr "Invalid server URL '$server_url'. Must start with http:// or https://."
@@ -423,6 +431,7 @@ Install options (optional):
   --auto                         auto install Headscale using default or custom options
   --serverurl  [URL]             server URL (e.g. https://hs.example.com)
   --port       [number]          TCP port for Headscale (1-65535, default: 8080)
+  --listenaddr [address]         listen address (default: 0.0.0.0, use 127.0.0.1 for local only)
   --username   [name]            name for the initial user (default: admin)
   --basedomain [domain]          MagicDNS base domain (default: headscale.internal)
 
@@ -439,7 +448,7 @@ show_welcome() {
   else
     show_header
     op_text=default
-    if [ -n "$server_url" ] || [ -n "$server_port" ] ||
+    if [ -n "$server_url" ] || [ -n "$server_port" ] || [ -n "$listen_addr_arg" ] ||
       [ -n "$first_username" ] || [ -n "$base_domain_arg" ]; then
       op_text=custom
     fi
@@ -637,10 +646,11 @@ compute_server_url() {
 show_config() {
   if [ "$auto" != 0 ]; then
     echo
-    echo "Server URL:  $computed_server_url"
-    echo "Port:        TCP/$port"
-    echo "Username:    $username"
-    echo "Base domain: $base_domain"
+    echo "Server URL:   $computed_server_url"
+    echo "Listen addr:  $listen_addr"
+    echo "Port:         TCP/$port"
+    echo "Username:     $username"
+    echo "Base domain:  $base_domain"
   fi
 }
 
@@ -738,7 +748,7 @@ create_config() {
 # https://github.com/hwdsl2/headscale-install
 
 server_url: ${computed_server_url}
-listen_addr: 0.0.0.0:${port}
+listen_addr: ${listen_addr}:${port}
 metrics_listen_addr: 127.0.0.1:9090
 grpc_listen_addr: 127.0.0.1:50443
 grpc_allow_insecure: false
@@ -1274,6 +1284,8 @@ hssetup() {
   remove_hs=0
   server_url=""
   server_port=""
+  listen_addr_arg=""
+  listen_addr="0.0.0.0"
   first_username=""
   base_domain_arg=""
   target_user=""
@@ -1393,6 +1405,7 @@ hssetup() {
     else
       # Auto mode
       [ -n "$server_port" ] && port="$server_port" || port=8080
+      [ -n "$listen_addr_arg" ] && listen_addr="$listen_addr_arg" || listen_addr="0.0.0.0"
       if [ -z "$server_url" ]; then
         detect_ip
         check_nat_ip
