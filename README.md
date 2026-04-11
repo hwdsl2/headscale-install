@@ -26,7 +26,7 @@ See also: [WireGuard](https://github.com/hwdsl2/wireguard-install), [OpenVPN](ht
 - A Linux server (cloud server, VPS or dedicated server)
 - A **publicly reachable domain name with HTTPS** is strongly recommended for production use
 
-> **Note:** Without HTTPS some Tailscale clients may not connect properly. See [TLS and reverse proxy](#tls-and-reverse-proxy) for setup options.
+**Note:** Without HTTPS some Tailscale clients may not connect properly. See [TLS and reverse proxy](#tls-and-reverse-proxy) for setup options.
 
 ## Installation
 

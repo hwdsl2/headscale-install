@@ -27,6 +27,8 @@ This project is not affiliated with or endorsed by Tailscale Inc.
 
 ## Third-Party Software
 
+This script installs the following third-party software:
+
 **Headscale**
 
 BSD 3-Clause License
