@@ -4,13 +4,13 @@
 
 [![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
 
-**新：** Docker 版本也可用：[Docker 上的 Headscale 伺服器](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh-Hant.md)。
-
 適用於 Ubuntu、Debian、AlmaLinux、Rocky Linux、CentOS、RHEL、Fedora 和 openSUSE 的 Headscale 伺服器安裝腳本。
 
 本腳本安裝並設定 [Headscale](https://github.com/juanfont/headscale) —— Tailscale 協調伺服器的自託管開源實作。使用官方 Tailscale 客戶端應用程式連線所有裝置，由你自己的伺服器掌控一切。
 
-另請參閱：[WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-zh-Hant.md) 和 [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh-Hant.md) 伺服器自動安裝腳本。
+**另提供：**
+- Docker VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-zh-Hant.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh-Hant.md)、[Headscale](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh-Hant.md)
+- Docker AI/音訊：[Whisper (STT)](https://github.com/hwdsl2/docker-whisper/blob/main/README-zh-Hant.md)、[Kokoro (TTS)](https://github.com/hwdsl2/docker-kokoro/blob/main/README-zh-Hant.md)、[Embeddings](https://github.com/hwdsl2/docker-embeddings/blob/main/README-zh-Hant.md)、[LiteLLM](https://github.com/hwdsl2/docker-litellm/blob/main/README-zh-Hant.md)
 
 ## 功能特色
 
@@ -26,7 +26,7 @@
 - 一台 Linux 伺服器（雲端伺服器、VPS 或獨立伺服器）
 - 強烈建議在正式環境中使用**可公開存取的具有 HTTPS 的網域名稱**
 
-> **注：** 若不使用 HTTPS，部分 Tailscale 客戶端可能無法正常連線。請參閱 [TLS 與反向代理](#tls-與反向代理) 了解設定選項。
+**注：** 若不使用 HTTPS，部分 Tailscale 客戶端可能無法正常連線。請參閱 [TLS 與反向代理](#tls-與反向代理) 了解設定選項。
 
 ## 安裝
 
@@ -43,6 +43,8 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 ```
 
 請將 `https://hs.example.com` 替換為你的實際 HTTPS 伺服器 URL。若未提供 `--serverurl`，將自動偵測伺服器的公用 IP 位址並使用 HTTP，不建議用於正式環境。請參閱 [TLS 與反向代理](#tls-與反向代理) 了解設定選項。
+
+**注：** 你可以選擇在同一台伺服器上安裝 [WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-zh-Hant.md) 和/或 [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh-Hant.md)。
 
 **選項 2：** 使用自訂選項進行互動式安裝。
 

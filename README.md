@@ -4,13 +4,13 @@
 
 [![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
 
-**New:** Also available: [Headscale server on Docker](https://github.com/hwdsl2/docker-headscale).
-
 Headscale server installer for Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS, RHEL, Fedora and openSUSE.
 
 This script installs and configures [Headscale](https://github.com/juanfont/headscale) — a self-hosted, open-source implementation of the Tailscale coordination server. Connect all your devices using the official Tailscale client apps, with your own server in control.
 
-See also: [WireGuard](https://github.com/hwdsl2/wireguard-install), [OpenVPN](https://github.com/hwdsl2/openvpn-install) and [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn) server auto setup scripts.
+**Also available:**
+- Docker VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server), [Headscale](https://github.com/hwdsl2/docker-headscale)
+- Docker AI/Audio: [Whisper (STT)](https://github.com/hwdsl2/docker-whisper), [Kokoro (TTS)](https://github.com/hwdsl2/docker-kokoro), [Embeddings](https://github.com/hwdsl2/docker-embeddings), [LiteLLM](https://github.com/hwdsl2/docker-litellm)
 
 ## Features
 
@@ -26,7 +26,7 @@ See also: [WireGuard](https://github.com/hwdsl2/wireguard-install), [OpenVPN](ht
 - A Linux server (cloud server, VPS or dedicated server)
 - A **publicly reachable domain name with HTTPS** is strongly recommended for production use
 
-> **Note:** Without HTTPS some Tailscale clients may not connect properly. See [TLS and reverse proxy](#tls-and-reverse-proxy) for setup options.
+**Note:** Without HTTPS some Tailscale clients may not connect properly. See [TLS and reverse proxy](#tls-and-reverse-proxy) for setup options.
 
 ## Installation
 
@@ -43,6 +43,8 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 ```
 
 Replace `https://hs.example.com` with your actual HTTPS server URL. If `--serverurl` is not provided, the server's public IP address is auto-detected and HTTP is used, which is not recommended for production. See [TLS and reverse proxy](#tls-and-reverse-proxy) for setup options.
+
+**Note:** Optionally install [WireGuard](https://github.com/hwdsl2/wireguard-install), [OpenVPN](https://github.com/hwdsl2/openvpn-install) and/or [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn) on the same server.
 
 **Option 2:** Interactive install using custom options.
 

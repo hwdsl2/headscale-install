@@ -4,13 +4,13 @@
 
 [![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
 
-**新：** Docker 版本也可用：[Docker 上的 Headscale 服务器](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh.md)。
-
 适用于 Ubuntu、Debian、AlmaLinux、Rocky Linux、CentOS、RHEL、Fedora 和 openSUSE 的 Headscale 服务器安装脚本。
 
 本脚本安装并配置 [Headscale](https://github.com/juanfont/headscale) —— Tailscale 协调服务器的自托管开源实现。使用官方 Tailscale 客户端应用连接所有设备，由你自己的服务器掌控一切。
 
-另请参阅：[WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-zh.md)、[OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-zh.md) 和 [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh.md) 服务器自动安装脚本。
+**另提供：**
+- Docker VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-zh.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-zh.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh.md)、[Headscale](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh.md)
+- Docker AI/音频：[Whisper (STT)](https://github.com/hwdsl2/docker-whisper/blob/main/README-zh.md)、[Kokoro (TTS)](https://github.com/hwdsl2/docker-kokoro/blob/main/README-zh.md)、[Embeddings](https://github.com/hwdsl2/docker-embeddings/blob/main/README-zh.md)、[LiteLLM](https://github.com/hwdsl2/docker-litellm/blob/main/README-zh.md)
 
 ## 功能特性
 
@@ -26,7 +26,7 @@
 - 一台 Linux 服务器（云服务器、VPS 或独立服务器）
 - 强烈建议在生产环境中使用**可公开访问的带有 HTTPS 的域名**
 
-> **注：** 若不使用 HTTPS，部分 Tailscale 客户端可能无法正常连接。请参阅 [TLS 与反向代理](#tls-与反向代理) 了解配置选项。
+**注：** 若不使用 HTTPS，部分 Tailscale 客户端可能无法正常连接。请参阅 [TLS 与反向代理](#tls-与反向代理) 了解配置选项。
 
 ## 安装
 
@@ -43,6 +43,8 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 ```
 
 请将 `https://hs.example.com` 替换为你的实际 HTTPS 服务器 URL。若未提供 `--serverurl`，将自动检测服务器的公网 IP 地址并使用 HTTP，不推荐用于生产环境。请参阅 [TLS 与反向代理](#tls-与反向代理) 了解配置选项。
+
+**注：** 你可以选择在同一台服务器上安装 [WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-zh.md)、[OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-zh.md) 和/或 [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh.md)。
 
 **选项 2：** 使用自定义选项进行交互式安装。
 

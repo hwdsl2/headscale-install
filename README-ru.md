@@ -4,13 +4,13 @@
 
 [![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
 
-**Новинка:** Также доступно: [сервер Headscale на Docker](https://github.com/hwdsl2/docker-headscale/blob/main/README-ru.md).
-
 Установщик сервера Headscale для Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS, RHEL, Fedora и openSUSE.
 
 Этот скрипт устанавливает и настраивает [Headscale](https://github.com/juanfont/headscale) — самостоятельно размещаемую реализацию координационного сервера Tailscale с открытым исходным кодом. Подключите все свои устройства с помощью официальных клиентских приложений Tailscale, управляя ими через собственный сервер.
 
-См. также: скрипты автоматической установки серверов [WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-ru.md), [OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-ru.md) и [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-ru.md).
+**Также доступно:**
+- Docker VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-ru.md), [OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-ru.md), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-ru.md), [Headscale](https://github.com/hwdsl2/docker-headscale/blob/main/README-ru.md)
+- Docker ИИ/Аудио: [Whisper (STT)](https://github.com/hwdsl2/docker-whisper/blob/main/README-ru.md), [Kokoro (TTS)](https://github.com/hwdsl2/docker-kokoro/blob/main/README-ru.md), [Embeddings](https://github.com/hwdsl2/docker-embeddings/blob/main/README-ru.md), [LiteLLM](https://github.com/hwdsl2/docker-litellm/blob/main/README-ru.md)
 
 ## Возможности
 
@@ -26,7 +26,7 @@
 - Linux-сервер (облачный сервер, VPS или выделенный сервер)
 - Для production-использования настоятельно рекомендуется **публично доступное доменное имя с HTTPS**
 
-> **Примечание:** Без HTTPS некоторые клиенты Tailscale могут не подключиться. Варианты настройки см. в разделе [TLS и обратный прокси](#tls-и-обратный-прокси).
+**Примечание:** Без HTTPS некоторые клиенты Tailscale могут не подключиться. Варианты настройки см. в разделе [TLS и обратный прокси](#tls-и-обратный-прокси).
 
 ## Установка
 
@@ -43,6 +43,8 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 ```
 
 Замените `https://hs.example.com` вашим реальным HTTPS URL сервера. Если `--serverurl` не указан, публичный IP-адрес сервера определяется автоматически и используется HTTP, что не рекомендуется для production. Варианты настройки см. в разделе [TLS и обратный прокси](#tls-и-обратный-прокси).
+
+**Примечание:** При желании вы можете установить [WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-ru.md), [OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-ru.md) и/или [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-ru.md) на тот же сервер.
 
 **Вариант 2:** Интерактивная установка с пользовательскими параметрами.
 
