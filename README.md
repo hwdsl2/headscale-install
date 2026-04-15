@@ -8,11 +8,7 @@ Headscale server installer for Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS, R
 
 This script installs and configures [Headscale](https://github.com/juanfont/headscale) — a self-hosted, open-source implementation of the Tailscale coordination server. Connect all your devices using the official Tailscale client apps, with your own server in control.
 
-**Also available:**
-- Docker VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server), [Headscale](https://github.com/hwdsl2/docker-headscale)
-- Docker AI/Audio: [Whisper (STT)](https://github.com/hwdsl2/docker-whisper), [Kokoro (TTS)](https://github.com/hwdsl2/docker-kokoro), [Embeddings](https://github.com/hwdsl2/docker-embeddings), [LiteLLM](https://github.com/hwdsl2/docker-litellm)
-
-## Features
+**Features:**
 
 - Fully automated Headscale server setup, no user input needed
 - Supports interactive install using custom options
@@ -20,6 +16,11 @@ This script installs and configures [Headscale](https://github.com/juanfont/head
 - Downloads the official Headscale binary with checksum verification
 - Installs Headscale as a systemd service with a dedicated system user
 - Configures firewall rules automatically (firewalld or iptables)
+
+**Also available:**
+
+- Docker VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server), [Headscale](https://github.com/hwdsl2/docker-headscale)
+- Docker AI/Audio: [Whisper (STT)](https://github.com/hwdsl2/docker-whisper), [Kokoro (TTS)](https://github.com/hwdsl2/docker-kokoro), [Embeddings](https://github.com/hwdsl2/docker-embeddings), [LiteLLM](https://github.com/hwdsl2/docker-litellm)
 
 ## Requirements
 
