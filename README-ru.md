@@ -53,7 +53,7 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 sudo bash headscale.sh
 ```
 
-Вы можете настроить следующие параметры: URL сервера, TCP-порт, начальное имя пользователя и базовый домен MagicDNS.
+Вы можете настроить следующие параметры: URL сервера, TCP-порт, адрес прослушивания, начальное имя пользователя и базовый домен MagicDNS.
 
 <details>
 <summary>
@@ -107,6 +107,10 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
   --listenaddr [адрес]           адрес прослушивания (по умолчанию: 0.0.0.0, только локально: 127.0.0.1)
   --username   [имя]             имя начального пользователя (по умолчанию: admin)
   --basedomain [домен]           базовый домен MagicDNS (по умолчанию: headscale.internal)
+  --dnssrv1    [адрес]           основной DNS-сервер для клиентов (по умолчанию: 1.1.1.1)
+  --dnssrv2    [адрес]           резервный DNS-сервер для клиентов (по умолчанию: 1.0.0.1)
+  --loglevel   [уровень]         уровень журнала: panic, fatal, error, warn, info, debug, trace (по умолчанию: info)
+  --metricsport [число]          порт метрик Prometheus, только локально (по умолчанию: 9090)
 
 Также можно запустить скрипт без аргументов для пользовательской настройки.
 ```
@@ -256,7 +260,7 @@ server {
 
 ## Конфигурация
 
-Файл конфигурации находится по адресу `/etc/headscale/config.yaml`. Отредактируйте его для изменения настроек, таких как URL сервера, базовый домен или DNS-серверы, затем перезапустите службу:
+Файл конфигурации находится по адресу `/etc/headscale/config.yaml`. Отредактируйте его для изменения настроек, затем перезапустите службу:
 
 ```bash
 sudo systemctl restart headscale
@@ -277,7 +281,11 @@ sudo bash headscale.sh --auto \
   --port 8080 \
   --listenaddr 127.0.0.1 \
   --username admin \
-  --basedomain headscale.internal
+  --basedomain headscale.internal \
+  --dnssrv1 1.1.1.1 \
+  --dnssrv2 1.0.0.1 \
+  --loglevel info \
+  --metricsport 9090
 ```
 
 При использовании `--auto` все параметры установки необязательны. Если `--serverurl` не указан, публичный IP-адрес сервера определяется автоматически и используется HTTP (не рекомендуется для production).

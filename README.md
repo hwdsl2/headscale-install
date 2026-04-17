@@ -53,7 +53,7 @@ Replace `https://hs.example.com` with your actual HTTPS server URL. If `--server
 sudo bash headscale.sh
 ```
 
-You can customize the following options: server URL, TCP port, initial username and MagicDNS base domain.
+You can customize the following options: server URL, TCP port, listen address, initial username and MagicDNS base domain.
 
 <details>
 <summary>
@@ -107,6 +107,10 @@ Install options (optional):
   --listenaddr [address]         listen address (default: 0.0.0.0, use 127.0.0.1 for local only)
   --username   [name]            name for the initial user (default: admin)
   --basedomain [domain]          MagicDNS base domain (default: headscale.internal)
+  --dnssrv1    [address]         primary DNS server pushed to clients (default: 1.1.1.1)
+  --dnssrv2    [address]         secondary DNS server pushed to clients (default: 1.0.0.1)
+  --loglevel   [level]           log level: panic, fatal, error, warn, info, debug, trace (default: info)
+  --metricsport [number]         port for Prometheus metrics endpoint, local only (default: 9090)
 
 To customize options, you may also run this script without arguments.
 ```
@@ -256,7 +260,7 @@ server {
 
 ## Configuration
 
-The configuration file is at `/etc/headscale/config.yaml`. Edit this file to change settings such as the server URL, base domain or DNS servers, then restart the service:
+The configuration file is at `/etc/headscale/config.yaml`. Edit this file to change settings, then restart the service:
 
 ```bash
 sudo systemctl restart headscale
@@ -277,7 +281,11 @@ sudo bash headscale.sh --auto \
   --port 8080 \
   --listenaddr 127.0.0.1 \
   --username admin \
-  --basedomain headscale.internal
+  --basedomain headscale.internal \
+  --dnssrv1 1.1.1.1 \
+  --dnssrv2 1.0.0.1 \
+  --loglevel info \
+  --metricsport 9090
 ```
 
 All install options are optional when using `--auto`. If `--serverurl` is not provided, the server's public IP address is auto-detected and HTTP is used (not recommended for production).

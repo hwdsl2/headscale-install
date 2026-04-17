@@ -53,7 +53,7 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 sudo bash headscale.sh
 ```
 
-你可以自定义以下选项：服务器 URL、TCP 端口、初始用户名和 MagicDNS 基础域名。
+你可以自定义以下选项：服务器 URL、TCP 端口、监听地址、初始用户名和 MagicDNS 基础域名。
 
 <details>
 <summary>
@@ -107,6 +107,10 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
   --listenaddr [地址]              监听地址（默认：0.0.0.0，仅本地使用：127.0.0.1）
   --username   [名称]              初始用户名称（默认：admin）
   --basedomain [域名]              MagicDNS 基础域名（默认：headscale.internal）
+  --dnssrv1    [地址]              推送给客户端的主 DNS 服务器（默认：1.1.1.1）
+  --dnssrv2    [地址]              推送给客户端的备 DNS 服务器（默认：1.0.0.1）
+  --loglevel   [级别]              日志级别：panic, fatal, error, warn, info, debug, trace（默认：info）
+  --metricsport [数字]             Prometheus 指标端口，仅本地访问（默认：9090）
 
 也可不带参数运行脚本以使用自定义选项。
 ```
@@ -256,7 +260,7 @@ server {
 
 ## 配置
 
-配置文件位于 `/etc/headscale/config.yaml`。编辑此文件可修改服务器 URL、基础域名或 DNS 服务器等设置，然后重启服务：
+配置文件位于 `/etc/headscale/config.yaml`。编辑此文件可修改设置，然后重启服务：
 
 ```bash
 sudo systemctl restart headscale
@@ -277,7 +281,11 @@ sudo bash headscale.sh --auto \
   --port 8080 \
   --listenaddr 127.0.0.1 \
   --username admin \
-  --basedomain headscale.internal
+  --basedomain headscale.internal \
+  --dnssrv1 1.1.1.1 \
+  --dnssrv2 1.0.0.1 \
+  --loglevel info \
+  --metricsport 9090
 ```
 
 使用 `--auto` 时，所有安装选项均为可选。若未提供 `--serverurl`，将自动检测服务器的公网 IP 地址并使用 HTTP（不推荐用于生产环境）。
