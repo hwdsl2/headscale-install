@@ -31,6 +31,9 @@ jobs:
           sudo test -x /usr/local/bin/headscale
           sudo grep -q 'server_url: http://127.0.0.1:8080' /etc/headscale/config.yaml
           sudo grep -q 'listen_addr: 0.0.0.0:8080' /etc/headscale/config.yaml
+          sudo grep -q 'metrics_listen_addr: 127.0.0.1:9090' /etc/headscale/config.yaml
+          sudo grep -q 'level: info' /etc/headscale/config.yaml
+          sudo grep -q '1.1.1.1' /etc/headscale/config.yaml
 
           sudo bash hs-install.sh --listusers
           sudo bash hs-install.sh --listusers | grep -q 'admin'
@@ -57,6 +60,20 @@ jobs:
 
           sudo test -f /etc/headscale/config.yaml
           sudo grep -q 'listen_addr: 127.0.0.1:8080' /etc/headscale/config.yaml
+
+          sudo bash hs-install.sh --uninstall --yes
+
+          sudo test -f /etc/headscale/config.yaml && exit 1
+
+          # Test --dnssrv1, --dnssrv2, --loglevel, --metricsport options
+          sudo bash hs-install.sh --auto --serverurl http://127.0.0.1:8080 \
+            --dnssrv1 9.9.9.9 --dnssrv2 8.8.8.8 --loglevel debug --metricsport 9091
+
+          sudo test -f /etc/headscale/config.yaml
+          sudo grep -q 'metrics_listen_addr: 127.0.0.1:9091' /etc/headscale/config.yaml
+          sudo grep -q 'level: debug' /etc/headscale/config.yaml
+          sudo grep -q '9.9.9.9' /etc/headscale/config.yaml
+          sudo grep -q '8.8.8.8' /etc/headscale/config.yaml
 
           sudo bash hs-install.sh --uninstall --yes
 
