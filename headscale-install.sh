@@ -238,6 +238,26 @@ parse_args() {
       shift
       shift
       ;;
+    --dnssrv1)
+      [ -z "${2:-}" ] && show_usage "Missing value for --dnssrv1."
+      dns_srv1_arg="$2"
+      shift; shift
+      ;;
+    --dnssrv2)
+      [ -z "${2:-}" ] && show_usage "Missing value for --dnssrv2."
+      dns_srv2_arg="$2"
+      shift; shift
+      ;;
+    --loglevel)
+      [ -z "${2:-}" ] && show_usage "Missing value for --loglevel."
+      log_level_arg="$2"
+      shift; shift
+      ;;
+    --metricsport)
+      [ -z "${2:-}" ] && show_usage "Missing value for --metricsport."
+      metrics_port_arg="$2"
+      shift; shift
+      ;;
     -y | --yes)
       assume_yes=1
       shift
@@ -312,7 +332,8 @@ check_args() {
     fi
   fi
   if [ -n "$server_url" ] || [ -n "$server_port" ] ||
-    [ -n "$first_username" ] || [ -n "$base_domain_arg" ] || [ -n "$listen_addr_arg" ]; then
+    [ -n "$first_username" ] || [ -n "$base_domain_arg" ] || [ -n "$listen_addr_arg" ] ||
+    [ -n "$dns_srv1_arg" ] || [ -n "$dns_srv2_arg" ] || [ -n "$log_level_arg" ] || [ -n "$metrics_port_arg" ]; then
     if [ -e "$HS_CONF" ]; then
       show_usage "Invalid parameters. Headscale is already set up on this server."
     elif [ "$auto" = 0 ]; then
@@ -337,6 +358,21 @@ check_args() {
   fi
   if [ -n "$base_domain_arg" ] && ! check_dns_name "$base_domain_arg"; then
     exiterr "Invalid base domain '$base_domain_arg'. Must be a valid domain name (e.g. headscale.internal)."
+  fi
+  if [ -n "$dns_srv1_arg" ] && ! check_ip "$dns_srv1_arg"; then
+    exiterr "Invalid DNS server '$dns_srv1_arg'. Must be a valid IPv4 address (e.g. 1.1.1.1)."
+  fi
+  if [ -n "$dns_srv2_arg" ] && ! check_ip "$dns_srv2_arg"; then
+    exiterr "Invalid DNS server '$dns_srv2_arg'. Must be a valid IPv4 address (e.g. 1.0.0.1)."
+  fi
+  if [ -n "$log_level_arg" ]; then
+    case "$log_level_arg" in
+      panic|fatal|error|warn|info|debug|trace) ;;
+      *) exiterr "Invalid log level '$log_level_arg'. Must be one of: panic, fatal, error, warn, info, debug, trace." ;;
+    esac
+  fi
+  if [ -n "$metrics_port_arg" ] && ! check_port "$metrics_port_arg"; then
+    exiterr "Invalid metrics port. Must be an integer between 1 and 65535."
   fi
 }
 
@@ -434,6 +470,10 @@ Install options (optional):
   --listenaddr [address]         listen address (default: 0.0.0.0, use 127.0.0.1 for local only)
   --username   [name]            name for the initial user (default: admin)
   --basedomain [domain]          MagicDNS base domain (default: headscale.internal)
+  --dnssrv1    [address]         primary DNS server pushed to clients (default: 1.1.1.1)
+  --dnssrv2    [address]         secondary DNS server pushed to clients (default: 1.0.0.1)
+  --loglevel   [level]           log level: panic, fatal, error, warn, info, debug, trace (default: info)
+  --metricsport [number]         port for Prometheus metrics endpoint, local only (default: 9090)
 
 To customize options, you may also run this script without arguments.
 EOF
@@ -449,7 +489,8 @@ show_welcome() {
     show_header
     op_text=default
     if [ -n "$server_url" ] || [ -n "$server_port" ] || [ -n "$listen_addr_arg" ] ||
-      [ -n "$first_username" ] || [ -n "$base_domain_arg" ]; then
+      [ -n "$first_username" ] || [ -n "$base_domain_arg" ] ||
+      [ -n "$dns_srv1_arg" ] || [ -n "$dns_srv2_arg" ] || [ -n "$log_level_arg" ] || [ -n "$metrics_port_arg" ]; then
       op_text=custom
     fi
     echo
@@ -646,11 +687,14 @@ compute_server_url() {
 show_config() {
   if [ "$auto" != 0 ]; then
     echo
-    echo "Server URL:   $computed_server_url"
-    echo "Listen addr:  $listen_addr"
-    echo "Port:         TCP/$port"
-    echo "Username:     $username"
-    echo "Base domain:  $base_domain"
+    echo "Server URL:    $computed_server_url"
+    echo "Listen addr:   $listen_addr"
+    echo "Port:          TCP/$port"
+    echo "Username:      $username"
+    echo "Base domain:   $base_domain"
+    echo "DNS servers:   ${hs_dns_srv1}${hs_dns_srv2:+, ${hs_dns_srv2}}"
+    echo "Log level:     $hs_log_level"
+    echo "Metrics port:  TCP/$hs_metrics_port"
   fi
 }
 
@@ -749,7 +793,7 @@ create_config() {
 
 server_url: ${computed_server_url}
 listen_addr: ${listen_addr}:${port}
-metrics_listen_addr: 127.0.0.1:9090
+metrics_listen_addr: 127.0.0.1:${hs_metrics_port}
 grpc_listen_addr: 127.0.0.1:50443
 grpc_allow_insecure: false
 
@@ -779,7 +823,7 @@ database:
     write_ahead_log: true
 
 log:
-  level: info
+  level: ${hs_log_level}
   format: text
 
 policy:
@@ -792,8 +836,7 @@ dns:
   override_local_dns: true
   nameservers:
     global:
-      - 1.1.1.1
-      - 1.0.0.1
+${hs_dns_nameservers}
 
 unix_socket: ${HS_SOCK}
 unix_socket_permission: "0770"
@@ -1288,6 +1331,10 @@ hssetup() {
   listen_addr="0.0.0.0"
   first_username=""
   base_domain_arg=""
+  dns_srv1_arg=""
+  dns_srv2_arg=""
+  log_level_arg=""
+  metrics_port_arg=""
   target_user=""
   target_node_id=""
   target_node_key=""
@@ -1400,12 +1447,27 @@ hssetup() {
         echo "  *** Set up a TLS reverse proxy and re-run with:            ***"
         echo "  *** --serverurl https://your-domain.example.com            ***"
       fi
+      hs_dns_srv1="1.1.1.1"
+      hs_dns_srv2="1.0.0.1"
+      hs_log_level="info"
+      hs_metrics_port="9090"
+      hs_dns_nameservers="      - ${hs_dns_srv1}
+      - ${hs_dns_srv2}"
       enter_first_username
       enter_base_domain
     else
       # Auto mode
       [ -n "$server_port" ] && port="$server_port" || port=8080
       [ -n "$listen_addr_arg" ] && listen_addr="$listen_addr_arg" || listen_addr="0.0.0.0"
+      [ -n "$dns_srv1_arg" ] && hs_dns_srv1="$dns_srv1_arg" || hs_dns_srv1="1.1.1.1"
+      [ -n "$dns_srv2_arg" ] && hs_dns_srv2="$dns_srv2_arg" || hs_dns_srv2="1.0.0.1"
+      [ -n "$log_level_arg" ] && hs_log_level="$log_level_arg" || hs_log_level="info"
+      [ -n "$metrics_port_arg" ] && hs_metrics_port="$metrics_port_arg" || hs_metrics_port="9090"
+      hs_dns_nameservers="      - ${hs_dns_srv1}"
+      if [ -n "$hs_dns_srv2" ]; then
+        hs_dns_nameservers="${hs_dns_nameservers}
+      - ${hs_dns_srv2}"
+      fi
       if [ -z "$server_url" ]; then
         detect_ip
         check_nat_ip
