@@ -19,7 +19,8 @@ This script installs and configures [Headscale](https://github.com/juanfont/head
 
 **Also available:**
 
-- Docker: [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server), [Headscale](https://github.com/hwdsl2/docker-headscale), [Self-hosted AI Stack](https://github.com/hwdsl2/docker-ai-stack)
+- Docker VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server), [Headscale](https://github.com/hwdsl2/docker-headscale)
+- Docker AI: [Self-hosted AI Stack](https://github.com/hwdsl2/docker-ai-stack)
 
 ## Requirements
 
