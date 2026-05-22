@@ -290,6 +290,10 @@ sudo bash headscale.sh --auto \
 
 使用 `--auto` 时，所有安装选项均为可选。若未提供 `--serverurl`，将自动检测服务器的公网 IP 地址并使用 HTTP（不推荐用于生产环境）。
 
+## 社区
+
+- 讨论与展示：[r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+
 ## 授权协议
 
 Copyright (C) 2026 Lin Song   

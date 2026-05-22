@@ -290,6 +290,10 @@ sudo bash headscale.sh --auto \
 
 При использовании `--auto` все параметры установки необязательны. Если `--serverurl` не указан, публичный IP-адрес сервера определяется автоматически и используется HTTP (не рекомендуется для production).
 
+## Сообщество
+
+- Обсуждения и примеры: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+
 ## Лицензия
 
 Copyright (C) 2026 Lin Song   

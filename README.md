@@ -290,6 +290,10 @@ sudo bash headscale.sh --auto \
 
 All install options are optional when using `--auto`. If `--serverurl` is not provided, the server's public IP address is auto-detected and HTTP is used (not recommended for production).
 
+## Community
+
+- Discussions and showcases: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+
 ## License
 
 Copyright (C) 2026 Lin Song   
