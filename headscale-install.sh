@@ -1021,6 +1021,9 @@ finish_setup() {
   echo "  tailscale up --login-server $computed_server_url --authkey <key-above>"
   echo
   echo "Manage this server by running this script again."
+  echo
+  echo "Community discussions and updates:"
+  echo "https://www.reddit.com/r/selfhostedstack/"
   if [ -z "$server_url" ] && check_ip "${public_ip:-$ip}" 2>/dev/null; then
     echo
     echo "  *** NOTE: Using plain HTTP. For production, set up a TLS reverse proxy ***"
