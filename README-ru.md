@@ -292,7 +292,7 @@ sudo bash headscale.sh --auto \
 
 ## Сообщество
 
-- Обсуждения и примеры: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+- Обсуждения и обновления: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
 
 ## Лицензия
 

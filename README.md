@@ -292,7 +292,7 @@ All install options are optional when using `--auto`. If `--serverurl` is not pr
 
 ## Community
 
-- Discussions and showcases: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+- Discussions and updates: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
 
 ## License
 
