@@ -292,7 +292,8 @@ All install options are optional when using `--auto`. If `--serverurl` is not pr
 
 ## Community
 
-- Discussions and updates: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+- Subscribe for project updates: [Self-Hosted Stack](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)
+- Community discussions: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
 
 ## License
 
