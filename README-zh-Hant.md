@@ -292,7 +292,7 @@ sudo bash headscale.sh --auto \
 
 ## 社群
 
-- 訂閱專案更新：[Self-Hosted Stack](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)
+- 訂閱專案更新（每月 1-2 封郵件）：[Self-Hosted Stack](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)
 - 社群討論：[r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
 
 ## 授權條款
