@@ -45,7 +45,9 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 
 請將 `https://hs.example.com` 替換為你的實際 HTTPS 伺服器 URL。若未提供 `--serverurl`，將自動偵測伺服器的公用 IP 位址並使用 HTTP，不建議用於正式環境。請參閱 [TLS 與反向代理](#tls-與反向代理) 了解設定選項。
 
-**注：** 你可以選擇在同一台伺服器上安裝 [WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-zh-Hant.md) 和/或 [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh-Hant.md)。
+> [!TIP]
+> [訂閱專案更新](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)，獲取免費的 VPN 和 AI 部署指南（PDF，英文）。   
+> 你可以選擇在同一台伺服器上安裝 [WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-zh-Hant.md) 和/或 [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh-Hant.md)。
 
 **選項 2：** 使用自訂選項進行互動式安裝。
 
@@ -292,8 +294,8 @@ sudo bash headscale.sh --auto \
 
 ## 社群
 
-- 訂閱專案更新（每月 1-2 封郵件）：[Self-Hosted Stack](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)
-- 社群討論：[r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+- [訂閱專案更新](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)（每月 1–2 封郵件）
+- 加入 [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) 社群參與討論
 
 ## 授權條款
 

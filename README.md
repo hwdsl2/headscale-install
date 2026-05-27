@@ -45,7 +45,9 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 
 Replace `https://hs.example.com` with your actual HTTPS server URL. If `--serverurl` is not provided, the server's public IP address is auto-detected and HTTP is used, which is not recommended for production. See [TLS and reverse proxy](#tls-and-reverse-proxy) for setup options.
 
-**Note:** Optionally install [WireGuard](https://github.com/hwdsl2/wireguard-install), [OpenVPN](https://github.com/hwdsl2/openvpn-install) and/or [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn) on the same server.
+> [!TIP]
+> [Subscribe for project updates](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) and get free VPN and AI deployment guides (PDF).   
+> Optionally install [WireGuard](https://github.com/hwdsl2/wireguard-install), [OpenVPN](https://github.com/hwdsl2/openvpn-install) and/or [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn) on the same server.
 
 **Option 2:** Interactive install using custom options.
 
@@ -292,8 +294,8 @@ All install options are optional when using `--auto`. If `--serverurl` is not pr
 
 ## Community
 
-- Subscribe for project updates (1–2 emails/month): [Self-Hosted Stack](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)
-- Community discussions: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+- [Subscribe for project updates](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) (1–2 emails/month)
+- Join the [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) community for discussions
 
 ## License
 
