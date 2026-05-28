@@ -46,7 +46,8 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 Замените `https://hs.example.com` вашим реальным HTTPS URL сервера. Если `--serverurl` не указан, публичный IP-адрес сервера определяется автоматически и используется HTTP, что не рекомендуется для production. Варианты настройки см. в разделе [TLS и обратный прокси](#tls-и-обратный-прокси).
 
 > [!TIP]
-> [Подписаться на обновления проектов](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) и получить бесплатные руководства по развёртыванию VPN и AI (PDF, на английском).   
+> [Подписаться на обновления проектов](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn-ru) (1–2 письма в месяц) и получить бесплатные руководства по развёртыванию VPN и AI (PDF, на английском).
+> 
 > При желании вы можете установить [WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-ru.md), [OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-ru.md) и/или [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-ru.md) на тот же сервер.
 
 **Вариант 2:** Интерактивная установка с пользовательскими параметрами.
@@ -294,7 +295,7 @@ sudo bash headscale.sh --auto \
 
 ## Сообщество
 
-- [Подписаться на обновления проектов](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) (1–2 письма в месяц)
+- [Подписаться на обновления проектов](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn-ru) (1–2 письма в месяц)
 - Присоединяйтесь к сообществу [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) для обсуждений
 
 ## Лицензия
