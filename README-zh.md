@@ -46,8 +46,6 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 请将 `https://hs.example.com` 替换为你的实际 HTTPS 服务器 URL。若未提供 `--serverurl`，将自动检测服务器的公网 IP 地址并使用 HTTP，不推荐用于生产环境。请参阅 [TLS 与反向代理](#tls-与反向代理) 了解配置选项。
 
 > [!TIP]
-> [订阅项目更新](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn-zh)（每月 1–2 封邮件），获取免费的 VPN 和 AI 部署指南（PDF，英文）。
-> 
 > 你可以选择在同一台服务器上安装 [WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-zh.md)、[OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-zh.md) 和/或 [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh.md)。
 
 **选项 2：** 使用自定义选项进行交互式安装。
@@ -118,6 +116,12 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 也可不带参数运行脚本以使用自定义选项。
 ```
 </details>
+
+## 社区
+
+- 📬 [订阅项目更新](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn-zh)（每月 1–2 封邮件）——获取免费的 VPN 和 AI 部署指南（PDF，英文）
+- 💬 加入 [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) 社区参与讨论
+- ⭐ 如果本项目对你有帮助，请为仓库加星
 
 ## 安装后
 
@@ -292,11 +296,6 @@ sudo bash headscale.sh --auto \
 ```
 
 使用 `--auto` 时，所有安装选项均为可选。若未提供 `--serverurl`，将自动检测服务器的公网 IP 地址并使用 HTTP（不推荐用于生产环境）。
-
-## 社区
-
-- [订阅项目更新](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn-zh)（每月 1–2 封邮件）
-- 加入 [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) 社区参与讨论
 
 ## 授权协议
 
