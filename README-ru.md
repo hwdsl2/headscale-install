@@ -121,7 +121,7 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 
 - 📬 [Подписаться на обновления проектов](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn-ru) (1–2 письма в месяц) — получить бесплатные руководства по развёртыванию VPN и AI (PDF, на английском)
 - 💬 Присоединяйтесь к сообществу [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) для обсуждений и демонстрации проектов
-- ⭐ Поставьте звезду репозиторию, если он вам полезен
+- ⭐ Поставьте звезду репозиторию, если он оказался вам полезен — это поможет другим пользователям его найти.
 
 ## После установки
 
