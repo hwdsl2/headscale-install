@@ -20,7 +20,7 @@
 **另提供：**
 
 - Docker VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-zh-Hant.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh-Hant.md)、[Headscale](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh-Hant.md)
-- Docker AI：[自架 AI 套件](https://github.com/hwdsl2/docker-ai-stack/blob/main/README-zh-Hant.md)
+- AI：[自架 AI 套件](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/README-zh-Hant.md)
 
 ## 系統需求
 
