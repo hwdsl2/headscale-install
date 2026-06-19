@@ -91,7 +91,7 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
   --listusers                    список всех пользователей
   --listnodes                    список всех зарегистрированных узлов
   --listnodes  --user [имя]      список узлов конкретного пользователя
-  --registernode [ключ узла]     зарегистрировать узел по его ключу
+  --registernode [ID/ключ узла]  зарегистрировать узел по ID аутентификации или ключу узла
                 --user [имя]     (требует --user <имя>)
   --deletenode [ID узла]         удалить узел по числовому ID
   --createkey  --user [имя]      создать многоразовый ключ предавторизации для пользователя
@@ -150,10 +150,10 @@ tailscale up --login-server https://hs.example.com --authkey <ключ-из-вы
 
 После установки запустите скрипт снова для управления сервером.
 
-**Зарегистрировать узел по его ключу:**
+**Зарегистрировать узел по ID аутентификации или ключу узла:**
 
 ```bash
-sudo bash headscale.sh --registernode <key> --user admin
+sudo bash headscale.sh --registernode <auth-id-or-node-key> --user admin
 ```
 
 **Добавить пользователя:**

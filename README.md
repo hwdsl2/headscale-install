@@ -91,7 +91,7 @@ Options:
   --listusers                    list all users
   --listnodes                    list all registered nodes
   --listnodes  --user [name]     list nodes for a specific user
-  --registernode [node key]      register a node by its node key
+  --registernode [auth ID/key]   register a node by auth ID or node key
                 --user [name]    (requires --user <name>)
   --deletenode [node ID]         delete a node by its numeric ID
   --createkey  --user [name]     create a reusable pre-auth key for a user
@@ -150,10 +150,10 @@ Refer to the Headscale documentation for instructions on connecting clients:
 
 After setup, run the script again to manage your server.
 
-**Register a node by its node key:**
+**Register a node by its auth ID or node key:**
 
 ```bash
-sudo bash headscale.sh --registernode <key> --user admin
+sudo bash headscale.sh --registernode <auth-id-or-node-key> --user admin
 ```
 
 **Add a user:**

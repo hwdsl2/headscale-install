@@ -91,7 +91,7 @@ https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
   --listusers                      列出所有用户
   --listnodes                      列出所有已注册节点
   --listnodes  --user [名称]       列出特定用户的节点
-  --registernode [节点密钥]        按节点密钥注册节点
+  --registernode [认证 ID/节点密钥] 按认证 ID 或节点密钥注册节点
                 --user [名称]      （需要 --user <名称>）
   --deletenode [节点 ID]           按数字 ID 删除节点
   --createkey  --user [名称]       为用户创建可重用预授权密钥
@@ -150,10 +150,10 @@ tailscale up --login-server https://hs.example.com --authkey <输出中的密钥
 
 安装完成后，再次运行脚本即可管理你的服务器。
 
-**按节点密钥注册节点：**
+**按认证 ID 或节点密钥注册节点：**
 
 ```bash
-sudo bash headscale.sh --registernode <key> --user admin
+sudo bash headscale.sh --registernode <auth-id-or-node-key> --user admin
 ```
 
 **添加用户：**
