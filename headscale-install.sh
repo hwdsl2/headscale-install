@@ -15,7 +15,7 @@ exiterr2() { exiterr "Package installation failed. Check your package manager.";
 exiterr3() { exiterr "'yum install' failed."; }
 exiterr4() { exiterr "'zypper install' failed."; }
 
-HS_VERSION="0.28.0"
+HS_VERSION="0.29.1"
 HS_CONF="/etc/headscale/config.yaml"
 HS_CONF_DIR="/etc/headscale"
 HS_DATA_DIR="/var/lib/headscale"
@@ -325,7 +325,7 @@ check_args() {
   fi
   if [ "$register_node" = 1 ]; then
     if [ -z "$target_node_key" ]; then
-      exiterr "--registernode requires a node key. Copy the key shown by 'tailscale up'."
+      exiterr "--registernode requires an auth ID or node key. Copy the value shown by 'tailscale up'."
     fi
     if [ -z "$target_user" ]; then
       exiterr "--registernode requires --user <name>. Use '--listusers' to find user names."
@@ -453,7 +453,7 @@ Options:
   --listusers                    list all users
   --listnodes                    list all registered nodes
   --listnodes  --user [name]     list nodes for a specific user
-  --registernode [node key]      register a node by its node key
+  --registernode [auth ID/key]   register a node by auth ID or node key
                 --user [name]    (requires --user <name>)
   --deletenode [node ID]         delete a node by its numeric ID
   --createkey  --user [name]     create a reusable pre-auth key for a user
@@ -814,7 +814,10 @@ derp:
   update_frequency: 3h
 
 disable_check_updates: false
-ephemeral_node_inactivity_timeout: 30m
+
+node:
+  ephemeral:
+    inactivity_timeout: 30m
 
 database:
   type: sqlite
@@ -843,7 +846,6 @@ unix_socket_permission: "0770"
 
 logtail:
   enabled: false
-randomize_client_port: false
 EOF
   chmod 640 "$HS_CONF"
   chown root:headscale "$HS_CONF"
@@ -1174,13 +1176,14 @@ confirm_delete_node() {
 do_register_node() {
   echo
   echo "Registering node for user '$target_user'..."
-  if hs_cmd nodes register --user "$target_user" --key "$target_node_key" 2>&1; then
+  if hs_cmd auth register --user "$target_user" --auth-id "$target_node_key" 2>&1 \
+    || hs_cmd nodes register --user "$target_user" --key "$target_node_key" 2>&1; then
     echo
     echo "Node registered successfully."
   else
     echo
     echo "Failed to register node." >&2
-    echo "Make sure the node key and user name are correct." >&2
+    echo "Make sure the auth ID/node key and user name are correct." >&2
     exit 1
   fi
   echo
@@ -1547,7 +1550,7 @@ hssetup() {
       read -rp "Username to register the node for: " target_user
       [ -z "$target_user" ] && abort_and_exit
       echo
-      read -rp "Node key (from 'tailscale up' output): " target_node_key
+      read -rp "Auth ID / node key (from 'tailscale up' output): " target_node_key
       [ -z "$target_node_key" ] && abort_and_exit
       do_register_node
       exit 0
