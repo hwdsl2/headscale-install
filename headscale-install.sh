@@ -15,7 +15,7 @@ exiterr2() { exiterr "Package installation failed. Check your package manager.";
 exiterr3() { exiterr "'yum install' failed."; }
 exiterr4() { exiterr "'zypper install' failed."; }
 
-HS_VERSION="0.29.2"
+HS_VERSION="0.29.3"
 HS_CONF="/etc/headscale/config.yaml"
 HS_CONF_DIR="/etc/headscale"
 HS_DATA_DIR="/var/lib/headscale"
