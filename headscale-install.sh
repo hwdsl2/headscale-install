@@ -730,10 +730,35 @@ show_start_setup() {
   echo "Installing Headscale, please wait..."
 }
 
+restore_hs_selinux_context() {
+  # Return 1 if relabeling fails under enforcing mode, or 2 if restorecon is unavailable.
+  local selinux_mode=""
+  selinux_mode=$(getenforce 2>/dev/null || true)
+
+  if [ "$selinux_mode" = "Disabled" ]; then
+    return 0
+  fi
+
+  if command -v restorecon >/dev/null 2>&1; then
+    if restorecon "$HS_BIN"; then
+      return 0
+    fi
+    if [ "$selinux_mode" = "Enforcing" ]; then
+      return 1
+    fi
+    echo "Warning: Failed to restore the SELinux context on $HS_BIN." >&2
+  elif [ "$selinux_mode" = "Enforcing" ]; then
+    return 2
+  fi
+
+  return 0
+}
+
 download_headscale() {
   detect_arch
   local hs_bin="headscale_${HS_VERSION}_linux_${arch}"
   local hs_base_url="https://github.com/juanfont/headscale/releases/download/v${HS_VERSION}"
+  local selinux_status
   local tmp_dir
   tmp_dir=$(mktemp -d 2>/dev/null) || exiterr "Failed to create temporary directory."
   echo "  Downloading Headscale v${HS_VERSION} (${arch})..."
@@ -759,8 +784,26 @@ download_headscale() {
       rm -rf "$tmp_dir"
       exiterr "Headscale checksum verification failed."
     }
-  mv "$tmp_dir/$hs_bin" "$HS_BIN"
-  chmod 755 "$HS_BIN"
+  mv "$tmp_dir/$hs_bin" "$HS_BIN" || {
+    rm -rf "$tmp_dir"
+    exiterr "Failed to install the Headscale binary."
+  }
+  chmod 755 "$HS_BIN" || {
+    rm -rf "$tmp_dir"
+    exiterr "Failed to set permissions on $HS_BIN."
+  }
+  if restore_hs_selinux_context; then
+    selinux_status=0
+  else
+    selinux_status=$?
+  fi
+  if [ "$selinux_status" = 1 ]; then
+    rm -rf "$tmp_dir"
+    exiterr "Failed to restore the SELinux context on $HS_BIN."
+  elif [ "$selinux_status" = 2 ]; then
+    rm -rf "$tmp_dir"
+    exiterr "SELinux is enforcing, but restorecon is unavailable. Install the SELinux policy utilities and try again."
+  fi
   rm -rf "$tmp_dir"
 }
 
