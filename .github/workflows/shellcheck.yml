@@ -28,5 +28,5 @@ jobs:
           export SHELLCHECK_OPTS="-e SC1090,SC1091"
           shellcheck --version
           shopt -s globstar
-          ls -ld -- **/*.sh
-          shellcheck **/*.sh
+          ls -ld -- **/*.sh .github/workflows/tests/*.sh
+          shellcheck -- **/*.sh .github/workflows/tests/*.sh

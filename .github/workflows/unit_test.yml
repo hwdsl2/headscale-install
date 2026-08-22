@@ -1,0 +1,17 @@
+name: unit_test
+
+on: workflow_call
+
+permissions:
+  contents: read
+
+jobs:
+  unit_test:
+    runs-on: ubuntu-24.04
+    if: github.repository_owner == 'hwdsl2'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Unit tests
+        run: bash .github/workflows/tests/test_selinux_context.sh
