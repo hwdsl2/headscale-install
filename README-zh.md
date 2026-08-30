@@ -46,6 +46,8 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 
 请将 `https://hs.example.com` 替换为你的实际 HTTPS 服务器 URL。若未提供 `--serverurl`，将自动检测服务器的公网 IP 地址并使用 HTTP，不推荐用于生产环境。请参阅 [TLS 与反向代理](#tls-与反向代理) 了解配置选项。
 
+> **注：** `--serverurl` 选项仅用于设置 Headscale 向客户端公布的服务器 URL。它不会自动获取 TLS 证书，也不会安装或配置反向代理。你可以先运行安装脚本，但在客户端通过该 HTTPS URL 连接前，必须先配置好 Caddy 或 nginx。
+
 > [!TIP]
 > 你可以选择在同一台服务器上安装 [WireGuard](https://github.com/hwdsl2/wireguard-install/blob/master/README-zh.md)、[OpenVPN](https://github.com/hwdsl2/openvpn-install/blob/master/README-zh.md) 和/或 [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh.md)。
 

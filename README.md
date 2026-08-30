@@ -46,6 +46,8 @@ sudo bash headscale.sh --auto --serverurl https://hs.example.com
 
 Replace `https://hs.example.com` with your actual HTTPS server URL. If `--serverurl` is not provided, the server's public IP address is auto-detected and HTTP is used, which is not recommended for production. See [TLS and reverse proxy](#tls-and-reverse-proxy) for setup options.
 
+> **Note:** The `--serverurl` option only sets the server URL that Headscale advertises to clients. It does not obtain a TLS certificate or install or configure a reverse proxy. You may run the installer first, but Caddy or nginx must be configured before clients can connect using the HTTPS URL.
+
 > [!TIP]
 > Optionally install [WireGuard](https://github.com/hwdsl2/wireguard-install), [OpenVPN](https://github.com/hwdsl2/openvpn-install) and/or [IPsec VPN](https://github.com/hwdsl2/setup-ipsec-vpn) on the same server.
 
