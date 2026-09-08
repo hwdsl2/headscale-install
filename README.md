@@ -21,7 +21,9 @@ This script installs and configures [Headscale](https://github.com/juanfont/head
 
 - Docker VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server), [Headscale](https://github.com/hwdsl2/docker-headscale)
 - AI: [Self-Hosted AI Stack](https://github.com/hwdsl2/self-hosted-ai-stack) for local LLMs, chat, RAG, voice and AI tools
-- :books: Books: [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon), [Privacy Tools in the Age of AI](https://books2read.com/privacy)
+- 📚 Related reading: [Privacy Tools in the Age of AI](https://books2read.com/privacy)
+
+> 📘 **New book:** [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon). A practical guide to building, securing, and operating your own private AI stack.
 
 ## Requirements
 
@@ -120,12 +122,6 @@ To customize options, you may also run this script without arguments.
 ```
 </details>
 
-## Community
-
-- 📬 [Subscribe for project updates](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) (1–2 emails/month) — get free VPN and AI deployment guides (PDF)
-- 💬 Join the [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) community for discussions
-- ⭐ Star the repository if you find it useful — it helps others discover it
-
 ## After installation
 
 On first run, the script:
@@ -140,6 +136,12 @@ Copy the pre-auth key from the output and connect a device with the official [Ta
 ```bash
 tailscale up --login-server https://hs.example.com --authkey <key-from-output>
 ```
+
+## Community
+
+- 📬 [Get project updates and free deployment guides](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) (1–2 emails/month)
+- 💬 Join the [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) community for discussions
+- ⭐ Star the repository if you find it useful — it helps others discover it
 
 ## Client configuration
 
