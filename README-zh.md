@@ -21,9 +21,8 @@
 
 - Docker VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-zh.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-zh.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh.md)、[Headscale](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh.md)
 - AI：[自托管 AI 套件](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/README-zh.md)，用于本地 LLM、聊天、RAG、语音和 AI 工具
-- 📚 [Privacy Tools in the Age of AI](https://books2read.com/privacy)
 
-> 📘 对自托管 AI 感兴趣吗？[The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon) 是一本介绍本地大语言模型、RAG、语音 AI，以及使用 Docker 安全部署 AI 服务的实用指南。**电子书：$0.99/£0.99，优惠截至 9 月 20 日**（仅限美国/英国）。
+> 📘 对自托管 AI 感兴趣吗？[The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon)：**电子书 $0.99/£0.99，优惠截至 9 月 20 日**（仅限美国/英国）。一本关于构建、保护和运维自己的私有 AI 技术栈的实用指南。
 
 ## 系统要求
 
@@ -301,6 +300,10 @@ sudo bash headscale.sh --auto \
 ```
 
 使用 `--auto` 时，所有安装选项均为可选。若未提供 `--serverurl`，将自动检测服务器的公网 IP 地址并使用 HTTP（不推荐用于生产环境）。
+
+## 延伸阅读
+
+📚 如需了解更多保护在线隐私的方法，请参阅 [Privacy Tools in the Age of AI](https://books2read.com/privacy)。
 
 ## 授权协议
 
