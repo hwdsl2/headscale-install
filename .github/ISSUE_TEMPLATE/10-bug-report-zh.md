@@ -8,7 +8,7 @@ assignees: ''
 ---
 **任务列表**
 
-- [ ] 我已阅读[自述文件](https://github.com/hwdsl2/headscale-install/blob/main/README-zh.md)或相关章节
+- [ ] 我已阅读[自述文件](https://github.com/hwdsl2/headscale-install/blob/main/docs/README-zh.md)或相关章节
 - [ ] 我搜索了已有的 [Issues](https://github.com/hwdsl2/headscale-install/issues?q=is%3Aissue)
 - [ ] 这个问题是关于 Headscale 安装脚本/配置，而不只是 Headscale 本身
 

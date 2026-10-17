@@ -1,8 +1,8 @@
-[English](README.md) | [简体中文](README-zh.md) | [繁體中文](README-zh-Hant.md) | [Русский](README-ru.md)
+[English](../README.md) | [简体中文](README-zh.md) | [繁體中文](README-zh-Hant.md) | [Русский](README-ru.md)
 
 # Headscale 服务器自动安装脚本
 
-[![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/headscale-install/actions/workflows/main.yml) &nbsp;[![License: MIT](images/license.svg)](https://opensource.org/licenses/MIT)
 
 适用于 Ubuntu、Debian、AlmaLinux、Rocky Linux、CentOS、RHEL、Fedora 和 openSUSE 的 Headscale 服务器安装脚本。
 
@@ -19,8 +19,8 @@
 
 **另提供：**
 
-- Docker VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-zh.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-zh.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh.md)、[Headscale](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh.md)
-- AI：[自托管 AI 套件](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/README-zh.md)，用于本地 LLM、聊天、RAG、语音和 AI 工具
+- Docker VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/docs/README-zh.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/docs/README-zh.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh.md)、[Headscale](https://github.com/hwdsl2/docker-headscale/blob/main/docs/README-zh.md)
+- AI：[自托管 AI 套件](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/docs/README-zh.md)，用于本地 LLM、聊天、RAG、语音和 AI 工具
 
 > 📘 对自托管 AI 感兴趣吗？[The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon) 是一本关于构建、保护和运维自己的私有 AI 技术栈的实用指南。
 
@@ -77,7 +77,7 @@ curl -fL -o headscale.sh https://get.vpnsetup.net/hs
 https://github.com/hwdsl2/headscale-install/raw/main/headscale-install.sh
 ```
 
-如果仍无法下载，请打开 [headscale-install.sh](headscale-install.sh)，然后点击右侧的 `Raw` 按钮。按 `Ctrl/Cmd+A` 全选，`Ctrl/Cmd+C` 复制，然后粘贴到你喜欢的编辑器中。
+如果仍无法下载，请打开 [headscale-install.sh](../headscale-install.sh)，然后点击右侧的 `Raw` 按钮。按 `Ctrl/Cmd+A` 全选，`Ctrl/Cmd+C` 复制，然后粘贴到你喜欢的编辑器中。
 </details>
 
 <details>
